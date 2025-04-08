@@ -1,5 +1,33 @@
 <html>
-<body>
-<button onclick="window.ReactNativeWebView.postMessage('Hello World!')">Send</button>
-</body>
+  <head>
+    <script>
+      function callback() {
+        if (window.ReactNativeWebView)
+          window.ReactNativeWebView.postMessage("Hello World!");
+      }
+      window.addEventListener("message", function (event) {
+        document.getElementById("origin", event.origin);
+        document.getElementById("data", event.data);
+      });
+
+      if (!window.ReactNativeWebView) {
+        document.getElementById("error").innerHTML =
+          "ReactNativeWebView is undefined";
+      }
+    </script>
+  </head>
+  <body>
+    <div>
+      <button onclick="callback()">Send</button>
+      <p id="error"></p>
+    </div>
+
+    <div>
+      <p>Received:</p>
+      <ul>
+        <li id="origin"></li>
+        <li id="data"></li>
+      </ul>
+    </div>
+  </body>
 </html>
