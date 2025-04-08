@@ -7,11 +7,18 @@
       }
 
       window.addEventListener("message", function (event) {
-        document.getElementById("origin", event.origin);
-        document.getElementById("data", event.data);
+        console.log("Window", event);
+        document.getElementById("origin").innerHTML = event.origin;
+        document.getElementById("data").innerHTML = event.data;
       });
 
-      window.addEventListener("domready", function () {
+      document.addEventListener("message", function (event) {
+        console.log("Document", event);
+        document.getElementById("origin").innerHTML = event.origin;
+        document.getElementById("data").innerHTML = event.data;
+      });
+
+      window.addEventListener("load", function () {
         if (!window.ReactNativeWebView) {
           document.getElementById("error").innerHTML =
             "ReactNativeWebView is undefined";
